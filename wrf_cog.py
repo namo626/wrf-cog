@@ -47,7 +47,7 @@ def write_ptr(arr):
     dim = create_dim(count_dim(dim_clause))[:-1] + ',Iin,Kin,Jin)'
     print("    %s => %s%s" % (ptr_name, name, dim))
 
-def write_module(filename, modname):
+def write_module(filename, modname, sizelist):
     print("    module %s" % modname)
     print("    implicit none")
     print("\n")
@@ -55,9 +55,11 @@ def write_module(filename, modname):
     print("\n")
     print_cog(filename, write_omp_declare)
     print("\t\tcontains\n")
-    print("    subroutine init_%s(its,ite,kts,kte,jts,jte)" % modname)
+
+    sizes = ','.join(sizelist)
+    print("    subroutine init_%s(its,ite,kts,kte,jts,jte,%s)" % (modname,sizes))
     print("    implicit none")
-    print("    integer, intent(in) :: its,ite,kts,kte,jts,jte")
+    print("    integer, intent(in) :: its,ite,kts,kte,jts,jte,%s" % sizes)
     print("\n")
     print_cog(filename, write_alloc)
     print("\n")
