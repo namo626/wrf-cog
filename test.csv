@@ -1,0 +1,4 @@
+Name Type Dim 
+fr real(8) (nkr) 
+gt real(4) (nkr,icemax)
+bt real(4) (jmax)
