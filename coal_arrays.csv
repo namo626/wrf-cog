@@ -1,0 +1,10 @@
+Name type dim
+g1 real(8) (nkr)
+g2 real(8) (nkr,icemax)
+g3 real(8) (nkr)
+g4 real(8) (nkr)
+g5 real(8) (nkr)
+gdumb real(8) (jmax)
+gdumb_bf_breakup real(8) (jmax)
+xl_dumb real(8) (jmax)
+g_orig real(8) (nkr)

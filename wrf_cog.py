@@ -5,7 +5,8 @@ def print_cog(filename,f):
         reader = csv.reader(csvfile, delimiter=' ')
         next(reader)
         for arr in reader:
-            f(arr)
+            if(arr):
+                f(arr)
 
 def write_declare(arr):
     name = arr[0] + '_temp'
@@ -45,6 +46,25 @@ def write_ptr(arr):
 
     dim = create_dim(count_dim(dim_clause))[:-1] + ',Iin,Kin,Jin)'
     print("    %s => %s%s" % (ptr_name, name, dim))
+
+def write_module(filename, modname):
+    print("    module %s" % modname)
+    print("    implicit none")
+    print("\n")
+    print_cog(filename, write_declare)
+    print("\n")
+    print_cog(filename, write_omp_declare)
+    print("\n")
+    print("    subroutine init_%s" % modname)
+    print("    implicit none")
+    print("\n")
+    print_cog(filename, write_alloc)
+    print("\n")
+    print_cog(filename, write_omp_alloc)
+    print("\n")
+    print("    end subroutine init_%s" % modname)
+    print("    end module %s" % modname)
+
 
 def count_dim(s):
     return s.count(',') + 1
